@@ -1,0 +1,154 @@
+generated: '2026-08-05'
+method: probed
+source: live probes of https://www.quralis.com/.well-known/* and the API-discovery paths on 2026-08-05
+host: https://www.quralis.com
+result: none
+note: >-
+  No /.well-known/ discovery document is published on quralis.com. Every path below was fetched with
+  a normal desktop browser user-agent and returned the site's WordPress 404 page; requests made with
+  a generic bot user-agent are answered instead by a Cloudflare "Attention Required!" interstitial,
+  so the statuses recorded here are the ones a real browser receives. There is no security.txt, no
+  OIDC or OAuth metadata, no api-catalog, no ai-plugin.json, no llms.txt and no A2A agent card at
+  either the canonical or the legacy path.
+documents:
+- path: /.well-known/security.txt
+  status: 404
+  present: false
+- path: /.well-known/openid-configuration
+  status: 404
+  present: false
+- path: /.well-known/oauth-authorization-server
+  status: 404
+  present: false
+- path: /.well-known/oauth-protected-resource
+  status: 404
+  present: false
+- path: /.well-known/api-catalog
+  status: 404
+  present: false
+- path: /.well-known/ai-plugin.json
+  status: 404
+  present: false
+- path: /.well-known/apis.json
+  status: 404
+  present: false
+- path: /.well-known/agent-card.json
+  status: 404
+  present: false
+- path: /.well-known/agent.json
+  status: 404
+  present: false
+- path: /llms.txt
+  status: 404
+  present: false
+spec_discovery:
+  note: >-
+    Contract discovery (pipeline STEP 0b) run against quralis.com and every plausible API host. No
+    OpenAPI, Swagger, GraphQL SDL, AsyncAPI or publicly readable MCP tool manifest exists. QurAlis
+    is a clinical-stage biopharmaceutical company; it markets no API product and runs no developer
+    program.
+  probes:
+  - path: /openapi.json
+    status: 404
+  - path: /openapi.yaml
+    status: 404
+  - path: /swagger.json
+    status: 404
+  - path: /v1/openapi.json
+    status: 404
+  - path: /api-docs
+    status: 404
+  - path: /docs
+    status: 404
+  - path: /redoc
+    status: 404
+  - path: /rapidoc
+    status: 404
+  - path: /api
+    status: 404
+  - path: /graphql
+    status: 404
+  - path: /asyncapi.yaml
+    status: 404
+  hosts:
+  - host: api.quralis.com
+    dns: NXDOMAIN
+  - host: developer.quralis.com
+    dns: NXDOMAIN
+  - host: developers.quralis.com
+    dns: NXDOMAIN
+  - host: docs.quralis.com
+    dns: NXDOMAIN
+  - host: portal.quralis.com
+    dns: NXDOMAIN
+  - host: data.quralis.com
+    dns: NXDOMAIN
+  github_org:
+  - url: https://api.github.com/orgs/quralis
+    status: 404
+  - url: https://api.github.com/users/quralis
+    status: 404
+  - url: https://api.github.com/search/repositories?q=quralis
+    status: 200
+    total_count: 0
+  package_registries:
+  - registry: npm
+    query: quralis
+    results: 0
+  - registry: pypi
+    url: https://pypi.org/pypi/quralis/json
+    status: 404
+cms_surface:
+  note: >-
+    The only machine-readable surface quralis.com exposes is its own WordPress CMS route index at
+    /wp-json/. This is content-management infrastructure for the marketing site, not a developer
+    product QurAlis offers, so it is recorded here for transparency but is NOT catalogued as an API
+    and is NOT wired into apis.yml. robots.txt disallows only /wp-admin/, so the index itself is
+    reachable — but nothing under it is a QurAlis API.
+  url: https://www.quralis.com/wp-json/
+  status: 200
+  namespaces:
+  - oembed/1.0
+  - wpe/cache-plugin/v1
+  - wpe_sign_on_plugin/v1
+  - aiarc/v1
+  - cky/v1
+  - rankmath/v1
+  - genesisblocks/v1
+  - google-site-kit/v1
+  - mcp
+  - wp/v2
+  - wp-site-health/v1
+  - wp-block-editor/v1
+  - wp-abilities/v1
+  mcp_probe:
+    note: >-
+      The site carries the WordPress MCP Adapter plugin, which registers a generic MCP server route.
+      An anonymous JSON-RPC tools/list returns HTTP 401 rest_forbidden, so no tool manifest is
+      publicly readable. This is the stock WordPress abilities surface bundled by the plugin, not a
+      QurAlis-authored agent surface; it is not modelled as an MCP server here.
+    url: https://www.quralis.com/wp-json/mcp/mcp-adapter-default-server
+    method: tools/list
+    status: 401
+    body: '{"code":"rest_forbidden","message":"Sorry, you are not allowed to do that.","data":{"status":401}}'
+  abilities_probe:
+    url: https://www.quralis.com/wp-json/wp-abilities/v1/abilities
+    status: 401
+robots:
+  url: https://www.quralis.com/robots.txt
+  status: 200
+  sitemap: https://www.quralis.com/sitemap_index.xml
+  crawl_delay: 10
+  disallow:
+  - /wp-admin/
+  allow:
+  - /wp-admin/admin-ajax.php
+feeds:
+  note: >-
+    The WordPress RSS feed endpoints are advertised by the theme but return HTTP 500, so no news
+    feed pointer is wired into apis.yml.
+  probes:
+  - url: https://www.quralis.com/feed/
+    status: 500
+  - url: https://www.quralis.com/news/feed/
+    status: 500

@@ -1,5 +1,16 @@
 aid: quralis
 name: QurAlis
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.quralis.com/wp-content/uploads/2024/04/Quralis_Square_ogThumbnail_Royal_Blue_RGB.png
 description: >-
   QurAlis Corporation is a clinical-stage biotechnology company founded on December 12, 2016 in
